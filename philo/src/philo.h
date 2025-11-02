@@ -38,9 +38,10 @@ unsigned int	atou_safe(char *num);
 void			parse_args(t_table *table, int ac, char **av);
 void			smart_sleep(long long ms);
 long long		get_time_ms();
-void			print_error_and_exit(char *msg);
+void			print_error_and_exit(t_table *table, char *msg);
 
 void			*start_philo(void *arg);
 void			start(t_table *table);
 void			init(t_table *table);
 void			init_philo(t_table *table, t_philo *philo, int id);
+void			cleanup(t_table *table);

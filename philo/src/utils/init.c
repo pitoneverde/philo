@@ -3,9 +3,7 @@
 void	init(t_table *table)
 {
 	int	i;
-	// table = malloc(sizeof(t_table));
-	// if (!table)
-	// 	print_error_and_exit("Malloc failed @table");
+
 	pthread_mutex_init(&table->write_lock, NULL);
 	pthread_mutex_init(&table->death_lock, NULL);
 	table->philos = malloc(sizeof(t_philo) * table->n_philo);
@@ -16,7 +14,7 @@ void	init(t_table *table)
 		print_error_and_exit("Malloc failed @forks");
 	i = 0;
 	while (i < table->n_philo)
-		pthread_mutex_init(&table->forks[i], NULL);
+		pthread_mutex_init(&table->forks[i++], NULL);
 }
 
 void	init_philo(t_table *table, t_philo *philo, int id)

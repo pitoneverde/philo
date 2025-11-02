@@ -8,6 +8,7 @@ int		main(int ac, char **av)
 	init(&table);
 	parse_args(&table, ac, av);
 	start(&table);
+	return 0;
 }
 
 void	start(t_table *table)
