@@ -33,7 +33,7 @@ typedef struct s_philo
 	int             right;
 }   t_philo;
 
-unsigned int	atou_safe(char *num);
+unsigned int	atou_safe(char *num, int *check) __attribute__((nonnull(1, 2)));
 
 void			parse_args(t_table *table, int ac, char **av);
 void			smart_sleep(long long ms);
