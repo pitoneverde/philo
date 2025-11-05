@@ -43,6 +43,8 @@ void			print_message(t_philo *philo, char *msg);
 int				should_stop(t_philo *philo);
 int				global_should_stop(t_table *table);
 
+void			pick_forks(t_philo *philo);
+void			put_forks(t_philo *philo);
 void			philo_eat(t_philo *philo);
 void			philo_sleep(t_philo *philo);
 void			philo_think(t_philo *philo);

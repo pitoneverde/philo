@@ -16,8 +16,16 @@ void	*start_philo(void *arg)
 	return NULL;
 }
 
+void	*start_monitor(void *arg)
+{
+	t_table *table = (t_philo *)arg;
+	while (!global_should_stop(table))
+	{
+
+	}
+}
+
 /*
-// Implement fork picking + releasing
 // In monitor thread - when a philosopher dies
 void *monitor_routine(void *arg)
 {

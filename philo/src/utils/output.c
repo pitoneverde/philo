@@ -9,14 +9,14 @@ void	print_error_and_exit(t_table *table, char *msg)
 
 void	philo_eat(t_philo *philo)
 {
-	//Lock forks
+	pick_forks(philo);
 	print_message(philo, "is eating");
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->times_eat++;
 	philo->last_meal = get_time_ms();
 	pthread_mutex_unlock(&philo->meal_lock);
 	smart_sleep(philo->table, philo->table->t_eat);
-	//Unlock forks
+	put_forks(philo);
 }
 
 
@@ -26,6 +26,7 @@ void	philo_sleep(t_philo *philo)
 	smart_sleep(philo->table, philo->table->t_sleep);
 }
 
+// Random small time for pseudo-randomizing order
 void	philo_think(t_philo *philo)
 {
 	long long t = 1 + (philo->id * 3) % 10;
