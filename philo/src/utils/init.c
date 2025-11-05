@@ -30,7 +30,7 @@ void	init_philo(t_table *table, t_philo *philo, int id)
 	pthread_mutex_init(&philo->meal_lock, NULL);
 	pthread_mutex_init(&philo->stop_lock, NULL);
 	philo->last_meal = table->start_time;
-	philo->left = id;
-	philo->right = (id + 1) % table->n_philo;
+	philo->left = id - 1;
+	philo->right = (id) % table->n_philo;
 	pthread_create(&philo->thread, NULL, start_philo, philo);
 }

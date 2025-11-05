@@ -1,8 +1,24 @@
 #include "philo.h"
 
+void	start(t_table *table)
+{
+	int	i;
+
+	table->start_time = get_time_ms();
+	i = 0;
+	while (i < table->n_philo)
+	{
+		init_philo(table, &table->philos[i], i + 1);
+		i++;
+	}
+	pthread_create(&table->monitor, NULL, start_monitor, table);
+}
+
 void	*start_philo(void *arg)
 {
-	t_philo *philo = (t_philo *)arg;
+	t_philo *philo;
+
+	philo = (t_philo *)arg;
 	while (!should_stop(philo) && !global_should_stop(philo->table))
 	{
 		philo_eat(philo);
@@ -18,36 +34,34 @@ void	*start_philo(void *arg)
 
 void	*start_monitor(void *arg)
 {
-	t_table *table = (t_philo *)arg;
+	t_table *table;
+	int	i;
+
+	table = (t_table *)arg;
 	while (!global_should_stop(table))
 	{
-
+		i = 0;
+		while (i < table->n_philo)
+		{
+			pthread_mutex_lock(&table->death_lock);
+			if (philo_died(&table->philos[i]))
+			{
+				pthread_mutex_lock(&table->shared_stop_lock);
+				table->shared_stop = 1;
+				pthread_mutex_unlock(&table->shared_stop_lock);
+				write_message(&table->philos[i], "died");
+				return (pthread_mutex_unlock(&table->death_lock), NULL);
+			}
+			if (philo_is_full(&table->philos[i]))
+			{
+				pthread_mutex_lock(&table->philos[i].stop_lock);
+				table->philos[i].stop_flag = 1;
+				pthread_mutex_unlock(&table->philos[i].stop_lock);
+			}
+			pthread_mutex_unlock(&table->death_lock);
+			i++;
+		}
+		smart_sleep(table, 1);
 	}
+	return NULL;
 }
-
-/*
-// In monitor thread - when a philosopher dies
-void *monitor_routine(void *arg)
-{
-    t_table *table = (t_table *)arg;
-    
-    while (!global_should_stop(table))
-    {
-        for (int i = 0; i < table->num_philos; i++)
-        {
-            if (philosopher_died(&table->philos[i]))
-            {
-                // Set global stop - ALL philosophers should stop
-                pthread_mutex_lock(&table->stop_lock);
-                table->global_stop = 1;
-                pthread_mutex_unlock(&table->stop_lock);
-                
-                print_death_message(&table->philos[i]);
-                return NULL;
-            }
-        }
-        usleep(1000); // Check every 1ms
-    }
-    return NULL;
-}
-*/

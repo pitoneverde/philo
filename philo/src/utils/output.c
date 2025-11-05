@@ -9,13 +9,26 @@ void	print_error_and_exit(t_table *table, char *msg)
 
 void	philo_eat(t_philo *philo)
 {
+	t_table	*table;
+
+	table = philo->table;
+	if (table->n_philo == 1)
+	{
+		print_message(philo, "has taken a fork");
+		smart_sleep(table, table->t_die);
+		print_message(philo, "died");
+		pthread_mutex_lock(&table->shared_stop_lock);
+		table->shared_stop = 1;
+		pthread_mutex_unlock(&table->shared_stop_lock);
+		return;
+	}
 	pick_forks(philo);
-	print_message(philo, "is eating");
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->times_eat++;
 	philo->last_meal = get_time_ms();
 	pthread_mutex_unlock(&philo->meal_lock);
-	smart_sleep(philo->table, philo->table->t_eat);
+	print_message(philo, "is eating");
+	smart_sleep(table, table->t_eat);
 	put_forks(philo);
 }
 

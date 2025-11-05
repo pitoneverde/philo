@@ -20,10 +20,23 @@ int global_should_stop(t_table *table)
 	return (stop);
 }
 
-// Atomic write to stdout
+// Atomic printf to stdout
 void	print_message(t_philo *philo, char *msg)
 {
-	long long timestamp;
+	long long	timestamp;
+
+	if (should_stop(philo) || global_should_stop(philo->table))
+		return;
+	timestamp = get_time_ms() - philo->table->start_time;
+	pthread_mutex_lock(&philo->table->write_lock);
+	printf("%lld %d %s\n", timestamp, philo->id, msg);
+	pthread_mutex_unlock(&philo->table->write_lock);
+}
+
+// Atomic printf to stdout exclusive to monitor (bypass simulation ended check)
+void	write_message(t_philo *philo, char *msg)
+{
+	long long	timestamp;
 
 	timestamp = get_time_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->write_lock);

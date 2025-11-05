@@ -15,7 +15,7 @@ void smart_sleep(t_table *table, long long ms)
 	time_start = get_time_ms();
 	while ((get_time_ms() - time_start) < ms)
 	{
-		// if (global_should_stop(table)) break;
+		if (global_should_stop(table)) break;
 		// if (table->shared_stop)
 //			break;
 		usleep(500);
