@@ -5,6 +5,8 @@
 #include <pthread.h>
 #include <stdlib.h>
 
+typedef struct s_philo t_philo;
+
 typedef struct s_table
 {
 	unsigned int	n_philo;
@@ -35,9 +37,15 @@ typedef struct s_philo
 	pthread_mutex_t	stop_lock;
 }   t_philo;
 
-void			smart_sleep(long long ms);
+void			smart_sleep(t_table *table, long long ms);
 long long		get_time_ms(void);
-void			print_message(t_table *table, char *msg);
+void			print_message(t_philo *philo, char *msg);
+int				should_stop(t_philo *philo);
+int				global_should_stop(t_table *table);
+
+void			philo_eat(t_philo *philo);
+void			philo_sleep(t_philo *philo);
+void			philo_think(t_philo *philo);
 
 void			init(t_table *table);
 void			start(t_table *table);
