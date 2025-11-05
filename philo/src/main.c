@@ -17,5 +17,5 @@ void	start(t_table *table)
 	table->start_time = get_time_ms();
 	i = 0;
 	while (i < table->n_philo)
-		init_philo(table, &table->philos[i], i);
+		init_philo(table, &table->philos[i], ++i);
 }
