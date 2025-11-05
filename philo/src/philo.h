@@ -37,13 +37,13 @@ typedef struct s_philo
 
 void			smart_sleep(long long ms);
 long long		get_time_ms(void);
+void			print_message(t_table *table, char *msg);
 
+void			init(t_table *table);
+void			start(t_table *table);
+void			init_philo(t_table *table, t_philo *philo, int id);
 void			*start_philo(void *arg)
 				__attribute__((hot));
-
-void			start(t_table *table);
-void			init(t_table *table);
-void			init_philo(t_table *table, t_philo *philo, int id);
 
 void			parse_args(t_table *table, int ac, char **av)
 				__attribute__((nonnull(1)));
