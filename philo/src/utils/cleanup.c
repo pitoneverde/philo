@@ -6,7 +6,7 @@ static void destroy_mutexes(t_table *table);
 void	cleanup(t_table *table)
 {
 	int i;
-
+	
 	pthread_mutex_lock(&table->shared_stop_lock);
 	table->shared_stop = 1;
 	pthread_mutex_unlock(&table->shared_stop_lock);
