@@ -39,6 +39,8 @@ typedef struct s_philo
 }   t_philo;
 
 // General utils
+int				ft_isspace(int c);
+int				ft_isdigit(int c);
 void			smart_sleep(t_table *table, long long ms);
 long long		get_time_ms(void);
 void			print_message(t_philo *philo, char *msg);
