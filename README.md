@@ -25,21 +25,22 @@ make
 ## Usage
 
 Run the program with the following arguments:
-
+```bash
 ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
-
+```
 Parameters:
-- number_of_philosophers: Number of philosophers (and forks)
-- time_to_die: Time in milliseconds before a philosopher dies if they don't eat
-- time_to_eat: Time in milliseconds it takes for a philosopher to eat
-- time_to_sleep: Time in milliseconds a philosopher spends sleeping
-- number_of_times_each_philosopher_must_eat (optional): If specified, the simulation stops when all philosophers have eaten at least this many times
+- ```n_philo```: Number of philosophers (and forks)
+- ```t_die```: Time in milliseconds before a philosopher dies if they don't eat
+- ```t_eat```: Time in milliseconds it takes for a philosopher to eat
+- ```t_sleep```: Time in milliseconds a philosopher spends sleeping
+- ```times_eat``` (optional): If specified, the simulation stops when all philosophers have eaten at least this many times
 
 Examples:
+```bash
 ./philo 5 800 200 200
 ./philo 4 410 200 200 7
 ./philo 200 410 200 200
-
+```
 ## Output
 
 The program displays philosopher actions in the format:
@@ -53,10 +54,10 @@ Possible actions:
 - died
 
 Example output:
-[000000100] 1 has taken a fork
-[000000100] 1 is eating
-[000000300] 1 is sleeping
-[000000500] 1 is thinking
+[0000100] 1 has taken a fork
+[0000100] 1 is eating
+[0000300] 1 is sleeping
+[0000500] 1 is thinking
 
 ## Building
 
@@ -93,4 +94,4 @@ Samuel Bruma
 
 ## License
 
-This project is part of the 42 school curriculum.
+This project is part of the 42 Common Core.
