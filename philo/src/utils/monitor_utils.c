@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 00:06:49 by sabruma           #+#    #+#             */
+/*   Updated: 2025/11/07 00:08:14 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	philo_died(t_philo *philo)
 {
-	long long elapsed;
+	long long	elapsed;
 
 	pthread_mutex_lock(&philo->meal_lock);
 	elapsed = get_time_ms() - philo->last_meal;
@@ -13,7 +25,7 @@ int	philo_died(t_philo *philo)
 }
 
 //TODO: let the sim end if all threads are stopped
-int philo_is_full(t_philo *philo)
+int	philo_is_full(t_philo *philo)
 {
 	int	times_eaten;
 
@@ -42,7 +54,7 @@ int	should_simulation_end(t_table *table,
 		{
 			set_global_stop(table);
 			return (pthread_mutex_unlock(&table->death_lock), 1);
-		}	
+		}
 		pthread_mutex_lock(&table->philos[*i].stop_lock);
 		table->philos[*i].stop_flag = 1;
 		pthread_mutex_unlock(&table->philos[*i].stop_lock);

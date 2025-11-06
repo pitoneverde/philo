@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 00:06:53 by sabruma           #+#    #+#             */
+/*   Updated: 2025/11/07 00:12:07 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	print_error_and_exit(char *msg)
@@ -17,7 +29,7 @@ void	philo_eat(t_philo *philo)
 		smart_sleep(table, table->t_die);
 		print_message(philo, "died");
 		set_global_stop(table);
-		return;
+		return ;
 	}
 	pick_forks(philo);
 	pthread_mutex_lock(&philo->meal_lock);
@@ -29,7 +41,6 @@ void	philo_eat(t_philo *philo)
 	put_forks(philo);
 }
 
-
 void	philo_sleep(t_philo *philo)
 {
 	print_message(philo, "is sleeping");
@@ -39,7 +50,7 @@ void	philo_sleep(t_philo *philo)
 // Random small time for pseudo-randomizing order
 void	philo_think(t_philo *philo)
 {
-	long long t;
+	long long	t;
 
 	t = 1 + (philo->id * 3) % 10;
 	print_message(philo, "is thinking");

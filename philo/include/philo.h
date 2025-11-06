@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 00:07:21 by sabruma           #+#    #+#             */
+/*   Updated: 2025/11/07 00:14:19 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/time.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -5,7 +17,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-typedef struct s_philo t_philo;
+typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
@@ -13,7 +25,7 @@ typedef struct s_table
 	unsigned int	t_die;
 	unsigned int	t_eat;
 	unsigned int	t_sleep;
-	int				times_eat;   // Optional (-1 = not set)
+	int				times_eat;	// Optional (-1 = not set)
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	death_lock;
@@ -22,13 +34,13 @@ typedef struct s_table
 	int				shared_stop;
 	pthread_mutex_t	shared_stop_lock;
 	pthread_t		monitor;
-}   t_table;
+}	t_table;
 
 typedef struct s_philo
 {
 	int				id;
 	int				times_eat;
-	long long		last_meal;  // Read by monitor
+	long long		last_meal;	// Read by monitor
 	pthread_t		thread;
 	pthread_mutex_t	meal_lock;
 	t_table			*table;
@@ -36,7 +48,7 @@ typedef struct s_philo
 	int				right;
 	int				stop_flag;
 	pthread_mutex_t	stop_lock;
-}   t_philo;
+}	t_philo;
 
 // General utils
 int				ft_isspace(int c);
@@ -48,8 +60,8 @@ void			write_message(t_philo *philo, char *msg);
 int				should_stop(t_philo *philo);
 int				global_should_stop(t_table *table);
 void			set_global_stop(t_table *table);
-int				should_simulation_end(t_table *table, 
-				unsigned int *i, unsigned int *count_full);
+int				should_simulation_end(t_table *table,
+					unsigned int *i, unsigned int *count_full);
 
 // Philos API
 void			pick_forks(t_philo *philo);

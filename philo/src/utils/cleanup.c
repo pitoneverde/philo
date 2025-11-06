@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 00:06:34 by sabruma           #+#    #+#             */
+/*   Updated: 2025/11/07 00:10:06 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-static void signal_and_terminate_philos(t_table *table);
-static void destroy_mutexes(t_table *table);
+static void	signal_and_terminate_philos(t_table *table);
+static void	destroy_mutexes(t_table *table);
 
 void	cleanup(t_table *table)
 {
@@ -11,12 +23,12 @@ void	cleanup(t_table *table)
 	destroy_mutexes(table);
 	if (table->philos)
 		free(table->philos);
-	if	(table->forks)
+	if (table->forks)
 		free(table->forks);
 }
 
 // Separate signaling and joining to avoid deadlocks
-static void signal_and_terminate_philos(t_table *table)
+static void	signal_and_terminate_philos(t_table *table)
 {
 	unsigned int	i;
 
@@ -35,7 +47,7 @@ static void signal_and_terminate_philos(t_table *table)
 	}
 }
 
-static void destroy_mutexes(t_table *table)
+static void	destroy_mutexes(t_table *table)
 {
 	unsigned int	i;
 
@@ -48,9 +60,11 @@ static void destroy_mutexes(t_table *table)
 			pthread_mutex_destroy(&table->forks[i++]);
 	i = 0;
 	if (table->philos)
+	{
 		while (i < table->n_philo)
 		{
 			pthread_mutex_destroy(&table->philos[i].meal_lock);
 			pthread_mutex_destroy(&table->philos[i++].stop_lock);
 		}
+	}
 }

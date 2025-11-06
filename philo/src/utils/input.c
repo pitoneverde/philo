@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 00:06:46 by sabruma           #+#    #+#             */
+/*   Updated: 2025/11/07 00:11:41 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 // number_of_philosophers
@@ -7,7 +19,8 @@
 // [number_of_times_each_philosopher_must_eat]
 void	parse_args(t_table *table, int ac, char **av)
 {
-	int ok;
+	int	ok;
+
 	table->n_philo = atou_safe(av[1], &ok);
 	if (!ok)
 		print_error_and_exit("Invalid param: 1");

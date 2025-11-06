@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atomic_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 00:06:23 by sabruma           #+#    #+#             */
+/*   Updated: 2025/11/07 00:13:16 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 // Fast path
 int	should_stop(t_philo *philo)
 {
 	int	stop;
+
 	pthread_mutex_lock(&philo->stop_lock);
 	stop = philo->stop_flag;
 	pthread_mutex_unlock(&philo->stop_lock);
@@ -11,9 +24,10 @@ int	should_stop(t_philo *philo)
 }
 
 // Slow path
-int global_should_stop(t_table *table)
+int	global_should_stop(t_table *table)
 {
-	int stop;
+	int	stop;
+
 	pthread_mutex_lock(&table->shared_stop_lock);
 	stop = table->shared_stop;
 	pthread_mutex_unlock(&table->shared_stop_lock);
@@ -33,7 +47,7 @@ void	print_message(t_philo *philo, char *msg)
 	long long	timestamp;
 
 	if (should_stop(philo) || global_should_stop(philo->table))
-		return;
+		return ;
 	timestamp = get_time_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->write_lock);
 	printf("%07lld %d %s\n", timestamp, philo->id, msg);

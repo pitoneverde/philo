@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 00:07:00 by sabruma           #+#    #+#             */
+/*   Updated: 2025/11/07 00:11:25 by sabruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	start(t_table *table)
@@ -16,25 +28,25 @@ void	start(t_table *table)
 
 void	*start_philo(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	while (!should_stop(philo) && !global_should_stop(philo->table))
 	{
 		philo_eat(philo);
 		if (should_stop(philo) || global_should_stop(philo->table))
-			break;
+			break ;
 		philo_sleep(philo);
 		if (should_stop(philo) || global_should_stop(philo->table))
-			break;
+			break ;
 		philo_think(philo);
 	}
-	return NULL;
+	return (NULL);
 }
 
 void	*start_monitor(void *arg)
 {
-	t_table 		*table;
+	t_table			*table;
 	unsigned int	i;
 	unsigned int	count_full;
 
