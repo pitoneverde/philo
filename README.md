@@ -61,10 +61,10 @@ Example output:
 
 ## Building
 
-make - Build the project
-make clean - Remove object files
-make fclean - Remove object files and executable
-make re - Rebuild the project
+```make``` - Build the project
+```make clean``` - Remove object files
+```make fclean``` - Remove object files and executable
+```make re``` - Rebuild the project
 
 ## Implementation Details
 
