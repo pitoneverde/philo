@@ -17,11 +17,11 @@ The Dining Philosophers Problem is a classic synchronization problem that illust
 ## Installation
 
 Clone the repository and build the project:
-
+```bash
 git clone <your-repository-url>
 cd philosophers
 make
-
+```
 ## Usage
 
 Run the program with the following arguments:
