@@ -54,17 +54,18 @@ Possible actions:
 - died
 
 Example output:
+```bash
 [0000100] 1 has taken a fork
 [0000100] 1 is eating
 [0000300] 1 is sleeping
 [0000500] 1 is thinking
-
+```
 ## Building
 
-```make``` - Build the project
-```make clean``` - Remove object files
-```make fclean``` - Remove object files and executable
-```make re``` - Rebuild the project
+```make``` - Build the project  
+```make clean``` - Remove object files  
+```make fclean``` - Remove object files and executable  
+```make re``` - Rebuild the project  
 
 ## Implementation Details
 
