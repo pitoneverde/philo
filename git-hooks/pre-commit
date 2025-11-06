@@ -1,3 +1,3 @@
 #!/bin/sh
 echo "Running pre-commit make fclean"
-make fclean
+cd philo && make fclean
