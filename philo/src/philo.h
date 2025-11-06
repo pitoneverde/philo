@@ -45,6 +45,9 @@ void			print_message(t_philo *philo, char *msg);
 void			write_message(t_philo *philo, char *msg);
 int				should_stop(t_philo *philo);
 int				global_should_stop(t_table *table);
+void			set_global_stop(t_table *table);
+int				should_simulation_end(t_table *table, 
+				unsigned int *i, unsigned int *count_full);
 
 // Philos API
 void			pick_forks(t_philo *philo);
@@ -72,7 +75,7 @@ unsigned int	atou_safe(char *num, int *check)
 				__attribute__((warn_unused_result));
 
 // Failure handling and resource cleanup
-void			print_error_and_exit(t_table *table, char *msg)
+void			print_error_and_exit(char *msg)
 				__attribute__((noreturn));
 void			cleanup(t_table *table)
 				__attribute__((nonnull(1)));

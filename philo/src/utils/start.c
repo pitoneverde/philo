@@ -2,7 +2,7 @@
 
 void	start(t_table *table)
 {
-	int	i;
+	unsigned int	i;
 
 	table->start_time = get_time_ms();
 	i = 0;
@@ -34,34 +34,22 @@ void	*start_philo(void *arg)
 
 void	*start_monitor(void *arg)
 {
-	t_table *table;
-	int	i;
+	t_table 		*table;
+	unsigned int	i;
+	unsigned int	count_full;
 
 	table = (t_table *)arg;
 	while (!global_should_stop(table))
 	{
+		count_full = 0;
 		i = 0;
 		while (i < table->n_philo)
 		{
-			pthread_mutex_lock(&table->death_lock);
-			if (philo_died(&table->philos[i]))
-			{
-				pthread_mutex_lock(&table->shared_stop_lock);
-				table->shared_stop = 1;
-				pthread_mutex_unlock(&table->shared_stop_lock);
-				write_message(&table->philos[i], "died");
-				return (pthread_mutex_unlock(&table->death_lock), NULL);
-			}
-			if (philo_is_full(&table->philos[i]))
-			{
-				pthread_mutex_lock(&table->philos[i].stop_lock);
-				table->philos[i].stop_flag = 1;
-				pthread_mutex_unlock(&table->philos[i].stop_lock);
-			}
-			pthread_mutex_unlock(&table->death_lock);
+			if (should_simulation_end(table, &i, &count_full))
+				return (NULL);
 			i++;
 		}
 		smart_sleep(table, 1);
 	}
-	return NULL;
+	return (NULL);
 }

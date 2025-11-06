@@ -5,7 +5,7 @@ int		main(int ac, char **av)
 	t_table table;
 
 	if (ac != 5 && ac != 6)
-		print_error_and_exit(&table, "Argument count must be 5 or 6");
+		print_error_and_exit("Argument count must be 5 or 6");
 	parse_args(&table, ac, av);
 	init(&table);
 	start(&table);

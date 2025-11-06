@@ -20,6 +20,13 @@ int global_should_stop(t_table *table)
 	return (stop);
 }
 
+void	set_global_stop(t_table *table)
+{
+	pthread_mutex_lock(&table->shared_stop_lock);
+	table->shared_stop = 1;
+	pthread_mutex_unlock(&table->shared_stop_lock);
+}
+
 // Atomic printf to stdout
 void	print_message(t_philo *philo, char *msg)
 {

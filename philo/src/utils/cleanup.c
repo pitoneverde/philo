@@ -5,11 +5,7 @@ static void destroy_mutexes(t_table *table);
 
 void	cleanup(t_table *table)
 {
-	int i;
-	
-	pthread_mutex_lock(&table->shared_stop_lock);
-	table->shared_stop = 1;
-	pthread_mutex_unlock(&table->shared_stop_lock);
+	set_global_stop(table);
 	signal_and_terminate_philos(table);
 	pthread_join(table->monitor, NULL);
 	destroy_mutexes(table);
@@ -22,7 +18,7 @@ void	cleanup(t_table *table)
 // Separate signaling and joining to avoid deadlocks
 static void signal_and_terminate_philos(t_table *table)
 {
-	int	i;
+	unsigned int	i;
 
 	if (table->philos)
 	{
@@ -41,7 +37,7 @@ static void signal_and_terminate_philos(t_table *table)
 
 static void destroy_mutexes(t_table *table)
 {
-	int	i;
+	unsigned int	i;
 
 	pthread_mutex_destroy(&table->death_lock);
 	pthread_mutex_destroy(&table->write_lock);

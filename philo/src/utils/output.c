@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void	print_error_and_exit(t_table *table, char *msg)
+void	print_error_and_exit(char *msg)
 {
 	printf("%s\n", msg);
 	exit(EXIT_FAILURE);
@@ -16,9 +16,7 @@ void	philo_eat(t_philo *philo)
 		print_message(philo, "has taken a fork");
 		smart_sleep(table, table->t_die);
 		print_message(philo, "died");
-		pthread_mutex_lock(&table->shared_stop_lock);
-		table->shared_stop = 1;
-		pthread_mutex_unlock(&table->shared_stop_lock);
+		set_global_stop(table);
 		return;
 	}
 	pick_forks(philo);
@@ -41,7 +39,9 @@ void	philo_sleep(t_philo *philo)
 // Random small time for pseudo-randomizing order
 void	philo_think(t_philo *philo)
 {
-	long long t = 1 + (philo->id * 3) % 10;
+	long long t;
+
+	t = 1 + (philo->id * 3) % 10;
 	print_message(philo, "is thinking");
 	smart_sleep(philo->table, t);
 }
