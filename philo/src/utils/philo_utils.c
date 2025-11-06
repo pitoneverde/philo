@@ -3,14 +3,14 @@
 // Can't pick up same forks
 void	pick_forks(t_philo *philo)
 {
-	if (philo->left < philo->right)
+	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->table->forks[philo->left]);
 		print_message(philo, "has taken a fork");
 		pthread_mutex_lock(&philo->table->forks[philo->right]);
 		print_message(philo, "has taken a fork");
 	}
-	else if (philo->left > philo->right)
+	else
 	{
 		pthread_mutex_lock(&philo->table->forks[philo->right]);
 		print_message(philo, "has taken a fork");
