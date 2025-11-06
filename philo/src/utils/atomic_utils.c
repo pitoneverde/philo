@@ -36,7 +36,7 @@ void	print_message(t_philo *philo, char *msg)
 		return;
 	timestamp = get_time_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->write_lock);
-	printf("%lld %d %s\n", timestamp, philo->id, msg);
+	printf("%07lld %d %s\n", timestamp, philo->id, msg);
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
 
@@ -47,6 +47,6 @@ void	write_message(t_philo *philo, char *msg)
 
 	timestamp = get_time_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->write_lock);
-	printf("%lld %d %s\n", timestamp, philo->id, msg);
+	printf("%07lld %d %s\n", timestamp, philo->id, msg);
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
