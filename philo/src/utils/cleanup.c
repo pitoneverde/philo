@@ -6,7 +6,7 @@
 /*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:06:34 by sabruma           #+#    #+#             */
-/*   Updated: 2025/11/07 00:10:06 by sabruma          ###   ########.fr       */
+/*   Updated: 2025/11/10 19:21:55 by sabruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	signal_and_terminate_philos(t_table *table)
 static void	destroy_mutexes(t_table *table)
 {
 	unsigned int	i;
-
 	pthread_mutex_destroy(&table->death_lock);
 	pthread_mutex_destroy(&table->write_lock);
 	pthread_mutex_destroy(&table->shared_stop_lock);

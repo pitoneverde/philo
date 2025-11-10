@@ -6,7 +6,7 @@
 /*   By: sabruma <sabruma@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 00:07:00 by sabruma           #+#    #+#             */
-/*   Updated: 2025/11/07 00:11:25 by sabruma          ###   ########.fr       */
+/*   Updated: 2025/11/10 19:31:31 by sabruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	start(t_table *table)
 		init_philo(table, &table->philos[i], i + 1);
 		i++;
 	}
-	pthread_create(&table->monitor, NULL, start_monitor, table);
+	if (pthread_create(&table->monitor, NULL, start_monitor, table) != 0)
+		print_error_and_exit("Pthread create failed @monitor");
 }
 
 void	*start_philo(void *arg)
