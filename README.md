@@ -18,7 +18,7 @@ The Dining Philosophers Problem is a classic synchronization problem that illust
 
 Clone the repository and build the project:
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/pitoneverde/philo
 cd philosophers
 make
 ```
