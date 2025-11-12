@@ -19,7 +19,8 @@ void	cleanup(t_table *table)
 {
 	set_global_stop(table);
 	signal_and_terminate_philos(table);
-	pthread_join(table->monitor, NULL);
+	if (table->n_philo > 0)
+		pthread_join(table->monitor, NULL);
 	destroy_mutexes(table);
 	if (table->philos)
 		free(table->philos);
