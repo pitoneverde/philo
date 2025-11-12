@@ -15,7 +15,8 @@
 void	start(t_table *table)
 {
 	unsigned int	i;
-
+	if (table->n_philo == 0)
+		return ;
 	table->start_time = get_time_ms();
 	i = 0;
 	while (i < table->n_philo)
