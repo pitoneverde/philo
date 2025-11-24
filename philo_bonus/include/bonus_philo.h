@@ -30,7 +30,7 @@ typedef struct s_philo
 {
 	long long	last_meal;
 	int			id;
-	char		*sem_name;			//change to stackalloc
+	char		*sem_name;			//change to stackalloc (or recalculate every time)
 	sem_t		*death_sem;			//should be opened by main_start to make the process signal-safe
 	t_table		*table;
 	pthread_t	life_thread;
@@ -54,5 +54,8 @@ void			start_philo(t_philo *philo, int id)
 				__attribute__((noreturn));
 void			*philo_death(void *arg);
 void			*philo_life(void *arg);
+
+void			wait_for_end(t_table *table);
+void			cleanup(t_table *table);
 
 #endif

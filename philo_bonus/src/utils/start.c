@@ -4,7 +4,7 @@ void	start(t_table *table)
 {
 	int		i;
 	pid_t	pid;
-	t_philo	philo;
+	t_philo	philo;		// AVOID MALLOC
 
 	i = 0;
 	while (i < table->n_philo)
@@ -21,7 +21,7 @@ void	start(t_table *table)
 void	start_philo(t_philo *philo, int id)
 {
 	init_philo(philo->table, philo, id);
-	pthread_detach(philo->death_thread);
+	pthread_join(philo->death_thread, NULL);
 	pthread_join(philo->life_thread, NULL);
 	sem_close(philo->sem_name);
 	sem_unlink(philo->sem_name);

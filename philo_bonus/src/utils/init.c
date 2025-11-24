@@ -26,7 +26,7 @@ char	*get_sem_name(t_philo *philo)
 {
 	char	*str_id;
 	char	*timestamp;
-	char	*name;
+	char	name[50];
 
 	strcat(name, PHILO_SEM_PREFIX);
 	strcat(name, "_");

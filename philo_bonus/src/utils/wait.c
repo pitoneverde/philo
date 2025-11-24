@@ -1,5 +1,8 @@
 #include "bonus_philo.h"
 #include <sys/wait.h>
+#include <signal.h>
+
+void kill_all_children(t_table *table);
 
 void	wait_for_end(t_table *table)
 {
@@ -21,5 +24,18 @@ void	wait_for_end(t_table *table)
 			if (exit_code == EXIT_DEATH || exit_code == EXIT_ERROR)
 				kill_all_children(&table);
 		}
+	}
+}
+
+void kill_all_children(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->n_philo)
+	{
+		if (table->children_pid[i] > 0)
+			kill(table->children_pid[i], SIGTERM);
+		i++;
 	}
 }
