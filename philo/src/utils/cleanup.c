@@ -19,7 +19,8 @@ void	cleanup(t_table *table)
 {
 	set_global_stop(table);
 	signal_and_terminate_philos(table);
-	pthread_join(table->monitor, NULL);
+	if (table->n_philo > 0)
+		pthread_join(table->monitor, NULL);
 	destroy_mutexes(table);
 	if (table->philos)
 		free(table->philos);
@@ -50,6 +51,7 @@ static void	signal_and_terminate_philos(t_table *table)
 static void	destroy_mutexes(t_table *table)
 {
 	unsigned int	i;
+
 	pthread_mutex_destroy(&table->death_lock);
 	pthread_mutex_destroy(&table->write_lock);
 	pthread_mutex_destroy(&table->shared_stop_lock);
