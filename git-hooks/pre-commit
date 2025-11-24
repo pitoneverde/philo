@@ -1,3 +1,4 @@
 #!/bin/sh
 echo "Running pre-commit make fclean"
 cd philo && make fclean
+cd ../philo_bonus && make fclean
