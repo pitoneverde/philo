@@ -1,8 +1,8 @@
-NAME = philo
+NAME = philo_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -Iinclude
-# CFLAGS += -g -O0 # debug mode
+CFLAGS += -g -O0 # debug mode
 
 SRC_DIR = src
 UTILS_DIR = src/utils
@@ -18,9 +18,10 @@ SRCS =	$(SRC_DIR)/main.c \
 		$(UTILS_DIR)/output.c \
 		$(UTILS_DIR)/philo_utils.c \
 		$(UTILS_DIR)/start.c \
-		$(UTILS_DIR)/utils.c \
 		$(UTILS_DIR)/timing.c \
-		$(UTILS_DIR)/xtoa.c \
+		$(UTILS_DIR)/utils.c \
+		$(UTILS_DIR)/wait.c \
+		$(UTILS_DIR)/xtoa.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 GREEN = \033[0;32m
@@ -35,7 +36,7 @@ $(NAME): $(OBJS)
 	@echo "$(GREEN) $(NAME) compiled successfully!$(RESET)"
 
 # $(@D) expands to only the dirs in the target (no files)
-$(OBJ_DIR)/%.o: %.c $(INCLUDE_DIR)/philo.h
+$(OBJ_DIR)/%.o: %.c $(INCLUDE_DIR)/bonus_philo.h
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(BLUE) Compiling: $<$(RESET)"

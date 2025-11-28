@@ -22,7 +22,7 @@ void	wait_for_end(t_table *table)
 		{
 			exit_code = WEXITSTATUS((status));
 			if (exit_code == EXIT_DEATH || exit_code == EXIT_ERROR)
-				kill_all_children(&table);
+				kill_all_children(table);
 		}
 	}
 }
