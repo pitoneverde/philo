@@ -19,7 +19,7 @@ The Dining Philosophers Problem is a classic synchronization problem that illust
 Clone the repository and build the project:
 ```bash
 git clone https://github.com/pitoneverde/philo
-cd philosophers
+cd philo
 make
 ```
 ## Usage
