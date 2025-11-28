@@ -21,8 +21,15 @@ void	wait_for_end(t_table *table)
 		if (WIFEXITED(status))
 		{
 			exit_code = WEXITSTATUS((status));
-			if (exit_code == EXIT_DEATH || exit_code == EXIT_ERROR)
+			if (exit_code == EXIT_ERROR)
 				kill_all_children(table);
+			else if (exit_code == EXIT_DEATH)
+			{
+				sem_wait(table->stop_mutex);
+				table->shared_stop_flag = 1;
+				sem_post(table->stop_mutex);
+				sem_post(table->stop_sem);
+			}
 		}
 	}
 }

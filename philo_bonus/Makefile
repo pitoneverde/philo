@@ -15,6 +15,7 @@ SRCS =	$(SRC_DIR)/main.c \
 		$(UTILS_DIR)/cleanup.c \
 		$(UTILS_DIR)/init.c \
 		$(UTILS_DIR)/input.c \
+		$(UTILS_DIR)/monitor_utils.c \
 		$(UTILS_DIR)/output.c \
 		$(UTILS_DIR)/philo_utils.c \
 		$(UTILS_DIR)/start.c \
